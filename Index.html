@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food Details</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background-color: white;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    
+    .container {
+      width: 100%;
+      max-width: 430px; /* iPhone 14 Pro Max width */
+      height: 932px; /* iPhone 14 Pro Max height */
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .green-section {
+      background-color: #4CAF50;
+      height: 300px;
+      border-radius: 0 0 0 0;
+      position: relative;
+      padding: 16px;
+    }
+    
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      color: white;
+      padding-top: 50px;
+    }
+    
+    .back-btn {
+      width: 40px;
+      height: 40px;
+      background-color: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    
+    .title {
+      color: white;
+      font-size: 20px;
+      font-weight: 500;
+    }
+    
+    .like-btn {
+      width: 40px;
+      height: 40px;
+      background-color: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    
+    .white-section {
+      background-color: white;
+      border-radius: 25px 25px 0 0;
+      height: calc(932px - 220px);
+      position: absolute;
+      top: 220px;
+      left: 0;
+      right: 0;
+      padding: 100px 30px 30px;
+    }
+    
+    .food-image-container {
+      position: absolute;
+      top: 120px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+    }
+    
+    .food-image {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      object-fit: cover;
+      background-color: white;
+      padding: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .food-info-section {
+      margin-bottom: 20px;
+      margin-top: 15px;
+    }
+    
+    .food-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    
+    .food-title {
+      font-size: 28px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 5px;
+    }
+    
+    .food-price {
+      color: #4CAF50;
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    
+    .food-quantity {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #4CAF50;
+      color: white;
+      border-radius: 30px;
+      padding: 6px 12px;
+      min-width: 90px;
+    }
+    
+    .quantity-btn {
+      width: 28px;
+      height: 28px;
+      color: white;
+      border: none;
+      background: none;
+      font-size: 22px;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .quantity {
+      margin: 0 12px;
+      font-size: 18px;
+      color: white;
+      font-weight: bold;
+    }
+    
+    .food-info {
+      display: flex;
+      justify-content: flex-start;
+      margin: 20px 0;
+    }
+    
+    .info-item {
+      display: flex;
+      align-items: center;
+      margin-right: 25px;
+    }
+    
+    .info-icon {
+      margin-right: 8px;
+      font-size: 18px;
+    }
+    
+    .info-text {
+      font-size: 16px;
+      color: #666;
+      font-weight: 500;
+    }
+    
+    .about-section h3 {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+    
+    .food-description {
+      color: #888;
+      font-size: 16px;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+    
+    .read-more {
+      color: #4CAF50;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 500;
+    }
+    
+    .add-to-cart {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 16px;
+      padding: 18px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      position: absolute;
+      bottom: 40px;
+      left: 30px;
+      right: 30px;
+      width: calc(100% - 60px);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="green-section">
+      <div class="header">
+        <div class="back-btn">&#8249;</div>
+        <div class="title">Food Details</div>
+        <div class="like-btn">&#9825;</div>
+      </div>
+    </div>
+    
+    <div class="food-image-container">
+      <img src="descarga.png" alt="Avocado Salad" class="food-image">
+    </div>
+    
+    <div class="white-section">
+      <div class="food-info-section">
+        <div class="food-title-row">
+          <div>
+            <div class="food-title">Avocada Salad</div>
+            <div class="food-price">$15.00</div>
+          </div>
+          <div class="food-quantity">
+            <button class="quantity-btn">-</button>
+            <span class="quantity">1</span>
+            <button class="quantity-btn">+</button>
+          </div>
+        </div>
+        
+        <div class="food-info">
+          <div class="info-item">
+            <span class="info-icon" style="color: #FFD700;">★</span>
+            <span class="info-text">4.5</span>
+          </div>
+          <div class="info-item">
+            <span class="info-icon" style="color: #FF4500;">🔥</span>
+            <span class="info-text">100 Kcal</span>
+          </div>
+          <div class="info-item">
+            <span class="info-icon" style="color: #FFD700;">⏱</span>
+            <span class="info-text">20min</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="about-section">
+        <h3>About food</h3>
+        <p class="food-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et cursus tortor metus suspendisse sed...<a href="#" class="read-more">Read More</a></p>
+      </div>
+      
+      <button class="add-to-cart">Add to cart</button>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Food App - Home</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #4CAF50;
+            --light-gray: #f5f5f5;
+            --medium-gray: #e0e0e0;
+            --text-dark: #333333;
+            --text-gray: #767676;
+        }
+        
+        body {
+            background-color: white;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .app-container {
+            max-width: 480px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0;
+            background-color: white;
+            position: relative;
+        }
+        
+        .app-header {
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .menu-button {
+            background-color: var(--primary-green);
+            color: white;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+        
+        .location {
+            display: flex;
+            align-items: center;
+            color: var(--text-gray);
+            font-size: 14px;
+        }
+        
+        .location i {
+            color: var(--primary-green);
+            margin-right: 4px;
+        }
+        
+        .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-green);
+        }
+        
+        .greeting-section {
+            padding: 10px 16px 20px;
+        }
+        
+        .greeting {
+            font-size: 16px;
+            color: var(--primary-green);
+            margin-bottom: 4px;
+        }
+        
+        .find-food {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+        }
+        
+        .search-bar {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 12px 16px 12px 40px;
+            border: 1px solid var(--medium-gray);
+            border-radius: 8px;
+            font-size: 15px;
+            background-color: var(--light-gray);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-gray);
+        }
+        
+        .filter-button {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: var(--primary-green);
+            color: white;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .categories {
+            display: flex;
+            overflow-x: auto;
+            padding: 0 16px 16px;
+            gap: 10px;
+        }
+        
+        .categories::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .category {
+            padding: 8px 16px;
+            background-color: var(--light-gray);
+            border-radius: 20px;
+            white-space: nowrap;
+            color: var(--text-gray);
+            font-size: 14px;
+            font-weight: 500;
+            border: none;
+        }
+        
+        .category.active {
+            background-color: var(--primary-green);
+            color: white;
+        }
+        
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            padding: 0 16px;
+        }
+        
+        .food-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            position: relative;
+        }
+        
+        .food-image-container {
+            position: relative;
+            width: 100%;
+            padding-top: 100%; 
+        }
+        
+        .food-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .favorite {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background-color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            color: #ccc;
+            font-size: 14px;
+        }
+        
+        .favorite.active {
+            color: #ff4d4f;
+        }
+        
+        .food-details {
+            padding: 12px;
+        }
+        
+        .food-name {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 4px;
+            color: var(--text-dark);
+        }
+        
+        .food-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .time {
+            font-size: 12px;
+            color: var(--text-gray);
+        }
+        
+        .rating {
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+            color: var(--text-gray);
+        }
+        
+        .rating i {
+            color: #f5c518;
+            margin-right: 3px;
+            font-size: 12px;
+        }
+        
+        .food-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .price {
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--primary-green);
+        }
+        
+        .add-button {
+            background-color: var(--primary-green);
+            color: white;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+        
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            max-width: 480px;
+            background-color: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-gray);
+            font-size: 10px;
+            text-decoration: none;
+        }
+        
+        .nav-item i {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+        
+        .nav-item.active {
+            color: var(--primary-green);
+        }
+        
+        .content-container {
+            padding-bottom: 70px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="app-container">
+
+        <header class="app-header">
+            <button class="menu-button">
+                <i class="bi bi-list"></i>
+            </button>
+            <div class="location">
+                <i class="bi bi-geo-alt-fill"></i>
+                <span>Majora, BD</span>
+            </div>
+            <img src="descarga.png" alt="Profile" class="avatar">
+        </header>
+        
+        <div class="greeting-section">
+            <p class="greeting">Hi Rinku</p>
+            <h1 class="find-food">Find your food</h1>
+            
+            <div class="search-bar">
+                <i class="bi bi-search search-icon"></i>
+                <input type="text" class="search-input" placeholder="Search Food">
+                <button class="filter-button">
+                    <i class="bi bi-sliders"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="categories">
+            <button class="category active">Food</button>
+            <button class="category">Fruits</button>
+            <button class="category">Vegetables</button>
+            <button class="category">Grocery</button>
+        </div>
+        
+        <div class="content-container">
+            <div class="food-grid">
+
+                <div class="food-card">
+                    <div class="food-image-container">
+                        <img src="descarga.png" alt="Avocado Salad" class="food-image">
+                        <button class="favorite">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                    </div>
+                    <div class="food-details">
+                        <div class="food-name">Avocado Salad</div>
+                        <div class="food-meta">
+                            <span class="time">20min</span>
+                            <div class="rating">
+                                <i class="bi bi-star-fill"></i>
+                                <span>4.5</span>
+                            </div>
+                        </div>
+                        <div class="food-price">
+                            <div class="price">$15.00</div>
+                            <button class="add-button">
+                                <i class="bi bi-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+
+                <div class="food-card">
+                    <div class="food-image-container">
+                        <img src="descarga.png" alt="Avocado Salad" class="food-image">
+                        <button class="favorite active">
+                            <i class="bi bi-heart-fill"></i>
+                        </button>
+                    </div>
+                    <div class="food-details">
+                        <div class="food-name">Avocado Salad</div>
+                        <div class="food-meta">
+                            <span class="time">20min</span>
+                            <div class="rating">
+                                <i class="bi bi-star-fill"></i>
+                                <span>4.5</span>
+                            </div>
+                        </div>
+                        <div class="food-price">
+                            <div class="price">$15.00</div>
+                            <button class="add-button">
+                                <i class="bi bi-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+
+                <div class="food-card">
+                    <div class="food-image-container">
+                        <img src="descarga.png" alt="Royal Burger" class="food-image">
+                        <button class="favorite active">
+                            <i class="bi bi-heart-fill"></i>
+                        </button>
+                    </div>
+                    <div class="food-details">
+                        <div class="food-name">Royal Burger</div>
+                        <div class="food-meta">
+                            <span class="time">20min</span>
+                            <div class="rating">
+                                <i class="bi bi-star-fill"></i>
+                                <span>4.5</span>
+                            </div>
+                        </div>
+                        <div class="food-price">
+                            <div class="price">$15.00</div>
+                            <button class="add-button">
+                                <i class="bi bi-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="food-card">
+                    <div class="food-image-container">
+                        <img src="descarga.png" alt="Frutas Salad" class="food-image">
+                        <button class="favorite">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                    </div>
+                    <div class="food-details">
+                        <div class="food-name">Frutas Salad</div>
+                        <div class="food-meta">
+                            <span class="time">20min</span>
+                            <div class="rating">
+                                <i class="bi bi-star-fill"></i>
+                                <span>4.5</span>
+                            </div>
+                        </div>
+                        <div class="food-price">
+                            <div class="price">$15.00</div>
+                            <button class="add-button">
+                                <i class="bi bi-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+        <nav class="bottom-nav">
+            <a href="#" class="nav-item active">
+                <i class="bi bi-house-fill"></i>
+                <span>Home</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="bi bi-heart"></i>
+                <span>Favorites</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="bi bi-bell"></i>
+                <span>Notifications</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="bi bi-person"></i>
+                <span>Profile</span>
+            </a>
+        </nav>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
